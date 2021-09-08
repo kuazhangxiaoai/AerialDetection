@@ -1,6 +1,6 @@
 import torch
-from mmdet.ops.nms.rnms_wrapper import py_cpu_nms_poly_fast
-from mmdet.ops.nms import rnms_wrapper
+from mmdet.ops.nms.rnms import py_cpu_nms_poly_fast
+from mmdet.ops.nms import rnms
 from mmdet.ops.poly_nms import poly_nms_wrapper
 from mmdet.core import RotBox2Polys, RotBox2Polys_torch
 import time
@@ -34,7 +34,7 @@ def multiclass_nms_rbbox(multi_bboxes,
     if nms_type == 'poly_nms':
         nms_op = getattr(poly_nms_wrapper, nms_type)
     else:
-        nms_op = getattr(rnms_wrapper, nms_type)
+        nms_op = getattr(rnms, nms_type)
     for i in range(1, num_classes):
         cls_inds = multi_scores[:, i] > score_thr
         if not cls_inds.any():

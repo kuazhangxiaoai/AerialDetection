@@ -1,6 +1,6 @@
 import numpy as np
 import torch
-from .import poly_nms_cuda
+import poly_nms_cuda
 
 def poly_nms(dets, iou_thr, device_id=None):
     """Dispatch to either CPU or GPU NMS implementations.
@@ -47,3 +47,9 @@ def poly_nms(dets, iou_thr, device_id=None):
     if is_numpy:
         raise NotImplementedError
     return dets[inds, :], inds
+
+if __name__ == "__main__":
+    x = torch.Tensor([[0,0,0,50,50,50,50,0,0.7],[1,1,1,51,51,51,51,1,0.8]])
+    x = x.cuda()
+    y = poly_nms(x,iou_thr=0.8)
+    print("ending")
