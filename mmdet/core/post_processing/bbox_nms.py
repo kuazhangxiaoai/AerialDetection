@@ -1,7 +1,7 @@
 import torch
 
-from mmdet.ops.nms import nms
-
+#from mmdet.ops.nms import nms
+from torchvision.ops import nms
 
 def multiclass_nms(multi_bboxes,
                    multi_scores,

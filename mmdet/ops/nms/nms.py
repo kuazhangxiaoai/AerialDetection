@@ -1,9 +1,9 @@
 import numpy as np
 import torch
 
-import nms_cuda
-import nms_cpu
-#from .soft_nms_cpu import soft_nms_cpu
+from mmdet.ops.nms import nms_cuda
+from mmdet.ops.nms import nms_cpu
+from mmdet.ops.nms import soft_nms_cpu
 
 def pesudo_nms(dets, iou_thr):
     keep = torch.range(0, len(dets))
@@ -83,8 +83,9 @@ def soft_nms(dets, iou_thr, method='linear', sigma=0.5, min_score=1e-3):
             inds, dtype=torch.long)
     else:
         return new_dets.astype(np.float32), inds.astype(np.int64)
-
+'''
 if __name__ == "__main__":
     dets = torch.Tensor([[1,1,51,51,0.8]]).cuda()
     out = nms(dets,iou_thr=0.5)
     print(out)
+'''
